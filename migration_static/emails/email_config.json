@@ -1,0 +1,55 @@
+{
+  "emails": {
+    "primary": "hello@vastsilicon.com",
+    "support": "support@vastsilicon.com",
+    "partnerships": "partnerships@vastsilicon.com",
+    "investors": "investors@vastsilicon.com",
+    "privacy": "privacy@vastsilicon.com",
+    "legacy": "hi@vastsilicon.com"
+  },
+  "purposes": {
+    "hello@vastsilicon.com": "Main contact and general inquiries",
+    "support@vastsilicon.com": "Technical support for all apps",
+    "partnerships@vastsilicon.com": "Business partnerships and collaborations",
+    "investors@vastsilicon.com": "Investment opportunities and investor relations",
+    "privacy@vastsilicon.com": "Privacy policy questions and GDPR requests",
+    "hi@vastsilicon.com": "Legacy email used in legal documents"
+  },
+  "contactForms": {
+    "general": {
+      "to": "hello@vastsilicon.com",
+      "subject": "Contact from VastSilicon Website",
+      "fields": ["name", "email", "subject", "message"]
+    },
+    "moneytideSupport": {
+      "to": "support@vastsilicon.com",
+      "subject": "MoneyTide Support Request",
+      "fields": ["name", "email", "category", "message"]
+    },
+    "choicecheckSupport": {
+      "to": "support@vastsilicon.com", 
+      "subject": "ChoiceCheck Support Request",
+      "fields": ["name", "email", "category", "message"]
+    },
+    "partnerships": {
+      "to": "partnerships@vastsilicon.com",
+      "subject": "Partnership Inquiry",
+      "fields": ["name", "email", "company", "subject", "message"]
+    }
+  },
+  "templates": {
+    "contactForm": {
+      "subject": "Contact from VastSilicon Website - {userSubject}",
+      "body": "Name: {userName}\nEmail: {userEmail}\nSubject: {userSubject}\n\nMessage:\n{userMessage}\n\n---\nSent from: VastSilicon Contact Form\nTimestamp: {timestamp}"
+    },
+    "supportRequest": {
+      "subject": "{appName} Support - {userSubject}",
+      "body": "App: {appName}\nCategory: {category}\nName: {userName}\nEmail: {userEmail}\n\nIssue Description:\n{userMessage}\n\n---\nSent from: {appName} Support Form\nTimestamp: {timestamp}"
+    }
+  },
+  "autoResponse": {
+    "enabled": true,
+    "message": "Thank you for contacting VastSilicon. We've received your message and will get back to you within 24 hours on business days.",
+    "responseTime": "24 hours on business days"
+  }
+}

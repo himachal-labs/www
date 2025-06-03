@@ -1,0 +1,26 @@
+{
+  "appStore": {
+    "moneytide": "https://apps.apple.com/app/moneytide/",
+    "choicecheck": "https://apps.apple.com/app/id6742806334"
+  },
+  "websites": {
+    "main": "https://vastsilicon.com",
+    "moneytide": "https://moneytide.vastsilicon.com",
+    "choicecheck": "https://choicecheck.vastsilicon.com"
+  },
+  "email": {
+    "general": "hello@vastsilicon.com",
+    "support": "support@vastsilicon.com",
+    "partnerships": "partnerships@vastsilicon.com",
+    "investors": "investors@vastsilicon.com"
+  },
+  "socialMedia": {
+    "twitter": "https://twitter.com/vastsilicon",
+    "github": "https://github.com/vastsilicon",
+    "linkedin": "https://linkedin.com/company/vastsilicon"
+  },
+  "assets": {
+    "appStoreBadge": "/app_store_badge.svg",
+    "appStoreBadgeAlt": "/assets/app-store-badge.svg"
+  }
+}

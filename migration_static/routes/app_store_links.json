@@ -1,0 +1,53 @@
+{
+  "appStore": {
+    "moneytide": "https://apps.apple.com/app/moneytide/",
+    "choicecheck": "https://apps.apple.com/app/id6742806334"
+  },
+  "universalLinks": {
+    "teamId": "D8NYN6GSAF",
+    "bundleId": "com.vastsilicon.FinanceManager",
+    "patterns": [
+      "/invite/friend/*",
+      "/invite/group/*", 
+      "/process-receipt/*"
+    ],
+    "aasaConfig": {
+      "applinks": {
+        "apps": [],
+        "details": [
+          {
+            "appID": "D8NYN6GSAF.com.vastsilicon.FinanceManager",
+            "paths": [
+              "/invite/friend/*",
+              "/invite/group/*",
+              "/process-receipt/*"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "domains": {
+    "main": "vastsilicon.com",
+    "moneytide": "moneytide.vastsilicon.com",
+    "choicecheck": "choicecheck.vastsilicon.com"
+  },
+  "subdomainRoutes": {
+    "moneytide": "/moneytide",
+    "choicecheck": "/choicecheck"
+  },
+  "socialMedia": {
+    "twitter": "https://twitter.com/vastsilicon",
+    "github": "https://github.com/vastsilicon", 
+    "linkedin": "https://linkedin.com/company/vastsilicon"
+  },
+  "assetPaths": {
+    "appStoreBadge": "/app_store_badge.svg",
+    "favicon": "/favicon.ico",
+    "logo": "/vast_silicon_logo.png",
+    "screenshots": {
+      "moneytide": "/assets/screenshots/moneytide/actual/",
+      "choicecheck": "/assets/screenshots/choicecheck/"
+    }
+  }
+}

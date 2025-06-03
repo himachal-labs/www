@@ -1,0 +1,215 @@
+{
+  "company": {
+    "name": "VastSilicon",
+    "tagline": "Stop guessing. Start knowing.",
+    "mission": "Building cognitive infrastructure for human flourishing",
+    "philosophy": "Complexity isn't the problem—it's potential waiting for translation",
+    "vision": "Technology hub dedicated to creating innovative solutions that solve real-world problems",
+    "about": "Founded by a team of passionate entrepreneurs and developers, we're dedicated to pushing the boundaries of what's possible with modern technology while maintaining a user-first approach"
+  },
+  "coreValues": [
+    "We believe in the power of technology to transform lives and businesses",
+    "Our mission is to create intuitive, beautiful, and functional applications that solve real problems",
+    "User-first approach",
+    "Privacy by design",
+    "Innovation through entrepreneurship"
+  ],
+  "products": {
+    "moneytide": {
+      "name": "MoneyTide",
+      "tagline": "Manage expenses. Split costs. Stay organized.",
+      "description": "MoneyTide brings clarity to your personal and shared finances with an elegant, intuitive iOS experience",
+      "footerCTA": "Precision tools for your financial well-being",
+      "features": {
+        "personal": [
+          {
+            "title": "Smart Category Tracking",
+            "description": "Understand your spending habits with automatic categorization and visual breakdowns that help identify saving opportunities"
+          },
+          {
+            "title": "Insightful Dashboard", 
+            "description": "Get a complete picture of your finances with spending trends, category breakdowns, and balance summaries—all in one view"
+          },
+          {
+            "title": "Receipt Documentation",
+            "description": "Capture and store receipt images directly within the app for complete expense records and easy reference"
+          },
+          {
+            "title": "Seamless Sync",
+            "description": "Your data syncs effortlessly across all your devices, ensuring your financial information is always current and accessible"
+          }
+        ],
+        "shared": [
+          {
+            "title": "Group Expenses",
+            "description": "Create groups for roommates, trips, or events. Split costs fairly and keep everyone on the same page"
+          },
+          {
+            "title": "Balance Overview",
+            "description": "See who owes what at a glance with clear, visual balance summaries for every group and individual"
+          },
+          {
+            "title": "Fair Split Calculations",
+            "description": "Let MoneyTide calculate exactly who owes what based on your group's expenses and splits"
+          },
+          {
+            "title": "Privacy-Focused",
+            "description": "Your financial data stays secure and private with our privacy-first approach and optional encrypted cloud backup"
+          }
+        ]
+      },
+      "marketingMessages": [
+        "Designed for Apple users",
+        "Designed with elegance and simplicity in mind, following Apple's Human Interface Guidelines",
+        "Take control of your finances with our intuitive app designed for everyone",
+        "Track expenses with precision, categorize transactions, and gain insights through intuitive visualizations"
+      ]
+    },
+    "choicecheck": {
+      "name": "ChoiceCheck",
+      "tagline": "Stop guessing. Start knowing.",
+      "subtitle": "ChoiceCheck uses AI to analyze any product and tell you if it matches YOUR health goals, dietary needs, and preferences",
+      "description": "Make informed decisions about your food and cosmetics by scanning ingredients and receiving instant health insights based on trusted guidelines",
+      "howItWorks": [
+        {
+          "step": 1,
+          "title": "Snap a Photo",
+          "description": "Point your camera at any product"
+        },
+        {
+          "step": 2,
+          "title": "AI Analyzes", 
+          "description": "Our AI checks ingredients, nutrition, and your preferences"
+        },
+        {
+          "step": 3,
+          "title": "Get Your Answer",
+          "description": "Clear scores (0-100) with ratings and detailed reasoning"
+        }
+      ],
+      "features": [
+        {
+          "title": "Instant Ingredient Analysis",
+          "description": "Scan any ingredient list and get immediate insights on potential health impacts"
+        },
+        {
+          "title": "Health Ratings & Alternatives",
+          "description": "Get clear health ratings and suggestions for healthier alternatives"
+        },
+        {
+          "title": "Personalized Alerts",
+          "description": "Set your dietary preferences and receive personalized warnings for ingredients to avoid"
+        }
+      ],
+      "scoringSystem": {
+        "range": "0-100",
+        "ratings": {
+          "poor": { "range": "0-29", "color": "Red" },
+          "belowAverage": { "range": "30-49", "color": "Orange" },
+          "average": { "range": "50-69", "color": "Yellow" },
+          "good": { "range": "70-89", "color": "Green" },
+          "excellent": { "range": "90-100", "color": "Green" }
+        }
+      },
+      "userPersonas": [
+        {
+          "title": "Health-Conscious Shoppers",
+          "description": "Finally know which products actually match your health goals",
+          "benefits": ["Weight loss support", "Allergy alerts", "Sugar tracking"]
+        },
+        {
+          "title": "Busy Parents",
+          "description": "Make confident choices for your family in seconds",
+          "benefits": ["Kid-friendly options", "Nutritional balance", "Quick decisions"]
+        },
+        {
+          "title": "Fitness Enthusiasts",
+          "description": "Optimize your nutrition without the guesswork",
+          "benefits": ["Protein tracking", "Pre/post workout foods", "Macro balancing"]
+        }
+      ],
+      "problemsSolved": [
+        {
+          "problem": "Overwhelmed by choices in the grocery store",
+          "solution": "Get instant scores and ratings to guide decisions"
+        },
+        {
+          "problem": "Falling for misleading health claims",
+          "solution": "AI cuts through marketing to show facts"
+        },
+        {
+          "problem": "No time to research every product",
+          "solution": "Get expert analysis in seconds"
+        },
+        {
+          "problem": "Hard to stick to health goals",
+          "solution": "Personalized guidance for YOUR needs"
+        }
+      ],
+      "futureVision": {
+        "expansion": "Beyond food: Your universal choice assistant",
+        "comingFeatures": ["Cosmetics & Skincare", "Clothing & Fashion", "AR Shopping Assistant"],
+        "vision": "Today it's food. Tomorrow it's everything you buy"
+      }
+    }
+  },
+  "support": {
+    "common": {
+      "responseTime": "We'll get back to you within 24 hours on business days",
+      "supportMessage": "Our support team is ready to assist you with any questions or issues"
+    },
+    "moneytide": {
+      "helpMessage": "How can we help? Browse topics below or contact our support team for personalized assistance",
+      "categories": ["Getting Started", "Personal Expenses", "Shared Expenses", "Account & Settings"]
+    },
+    "choicecheck": {
+      "helpMessage": "Find answers, get help, and contact our support team",
+      "categories": ["Getting Started", "Using the App", "Nutrition Analysis", "Account & Settings"]
+    }
+  },
+  "privacy": {
+    "principles": [
+      "Your privacy in mind",
+      "Privacy by design",
+      "You choose what you share",
+      "Data protection by design", 
+      "Transparency and control",
+      "We don't sell your data"
+    ],
+    "security": [
+      "Industry-standard security measures",
+      "Encrypted data transmission using HTTPS/TLS",
+      "Secure authentication",
+      "Access controls and authentication"
+    ]
+  },
+  "navigation": {
+    "main": ["Home", "MoneyTide", "ChoiceCheck"],
+    "app": ["Features", "Screenshots", "Support", "Privacy", "Terms"],
+    "footer": {
+      "categories": ["Products", "Company", "Legal", "Support"],
+      "links": ["About", "Contact", "Privacy Policy", "Terms of Service", "General Inquiries", "Technical Support"]
+    }
+  },
+  "cta": {
+    "primary": [
+      "Discover Our Products",
+      "Learn More", 
+      "Download for iOS",
+      "Get in Touch",
+      "Contact Support",
+      "Send Message"
+    ],
+    "appStore": [
+      "Download on the App Store",
+      "Available on iOS",
+      "Make your first smart choice today"
+    ]
+  },
+  "legal": {
+    "entity": "Anukul Mohil DBA Vast Silicon",
+    "contact": "Anukul Mohil",
+    "email": "hi@vastsilicon.com",
+    "copyright": "© 2025 Vast Silicon, Inc. All rights reserved"
+  }
+}
