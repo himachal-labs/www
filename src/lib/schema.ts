@@ -1,4 +1,4 @@
-import { Product } from './products'
+import { Product } from './schemas'
 
 export interface OrganizationSchema {
   '@context': string
@@ -70,7 +70,7 @@ export function generateOrganizationSchema(): OrganizationSchema {
 }
 
 export function generateProductSchema(product: Product): SoftwareApplicationSchema {
-  const operatingSystems = product.platforms.map(platform => {
+  const operatingSystems = product.metadata.platforms.map(platform => {
     switch (platform.toLowerCase()) {
       case 'ios': return 'iOS'
       case 'android': return 'Android'
@@ -79,15 +79,17 @@ export function generateProductSchema(product: Product): SoftwareApplicationSche
     }
   })
 
+  const primaryPlatform = product.links.platforms.find(p => p.available)
+
   return {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: product.name,
-    applicationCategory: getApplicationCategory(product.name),
+    name: product.metadata.name,
+    applicationCategory: getApplicationCategory(product.metadata.name),
     operatingSystem: operatingSystems,
-    description: product.description,
-    url: `https://vastsilicon.com/products/${product.slug}`,
-    downloadUrl: product.appStore?.ios || product.appStore?.android,
+    description: product.content.problemStatement,
+    url: `https://vastsilicon.com/products/${product.metadata.slug}`,
+    downloadUrl: primaryPlatform?.url,
     offers: {
       '@type': 'Offer',
       price: '0',

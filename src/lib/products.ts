@@ -1,31 +1,11 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { Product, LegacyProductMetadata, validateProduct, migrateLegacyProduct, getDefaultTrustSignals } from './schemas'
+import { ProductTemplateProps } from '@/components/product'
 
-export interface ProductMetadata {
-  name: string
-  tagline: string
-  description: string
-  status: 'available' | 'coming-soon' | 'beta'
-  platforms: string[]
-  primaryColor: string
-  hero: {
-    image?: string
-    video?: string
-  }
-  features?: {
-    title: string
-    description: string
-    icon: string
-  }[]
-  screenshots?: string[]
-  appStore?: {
-    ios?: string
-    android?: string
-  }
-}
-
-export interface Product extends ProductMetadata {
+// Legacy interface for backward compatibility
+export interface LegacyProduct extends LegacyProductMetadata {
   slug: string
   content: string
 }
@@ -44,14 +24,43 @@ export async function getAllProducts(): Promise<Product[]> {
     .map(name => {
       const fullPath = path.join(productsDirectory, name)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const { data, content } = matter(fileContents)
+      const { data } = matter(fileContents)
+      const slug = name.replace(/\.mdx$/, '')
       
-      return {
-        slug: name.replace(/\.mdx$/, ''),
-        content,
-        ...data.metadata,
-      } as Product
+      // Try new format first
+      if (validateProduct(data)) {
+        return data as Product
+      }
+      
+      // Fall back to legacy format migration
+      if (data.metadata && typeof data.metadata === 'object') {
+        const migrated = migrateLegacyProduct(data.metadata as LegacyProductMetadata, slug)
+        
+        // Add default content if missing
+        if (!migrated.content) {
+          migrated.content = {
+            problemStatement: data.metadata.description || '',
+            solutionApproach: `${data.metadata.name} provides a solution.`,
+            features: data.metadata.features || [],
+            userScenarios: [],
+            painPoints: [],
+            benefits: [],
+            expansionVision: `The future of ${data.metadata.name}`,
+          }
+        }
+        
+        // Add default trust signals
+        if (migrated.growth && !migrated.growth.trustSignals.length) {
+          migrated.growth.trustSignals = getDefaultTrustSignals(data.metadata.name)
+        }
+        
+        return migrated as Product
+      }
+      
+      console.warn(`Invalid product data in ${name}`)
+      return null
     })
+    .filter((product): product is Product => product !== null)
   
   return products
 }
@@ -65,23 +74,106 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     }
     
     const fileContents = fs.readFileSync(fullPath, 'utf8')
-    const { data, content } = matter(fileContents)
+    const { data } = matter(fileContents)
     
-    return {
-      slug,
-      content,
-      ...data.metadata,
-    } as Product
-  } catch {
+    // Try new format first
+    if (validateProduct(data)) {
+      return data as Product
+    }
+    
+    // Fall back to legacy format migration
+    if (data.metadata && typeof data.metadata === 'object') {
+      const migrated = migrateLegacyProduct(data.metadata as LegacyProductMetadata, slug)
+      
+      // Add default content if missing
+      if (!migrated.content) {
+        migrated.content = {
+          problemStatement: data.metadata.description || '',
+          solutionApproach: `${data.metadata.name} provides a solution.`,
+          features: data.metadata.features || [],
+          userScenarios: [],
+          painPoints: [],
+          benefits: [],
+          expansionVision: `The future of ${data.metadata.name}`,
+        }
+      }
+      
+      // Add default trust signals
+      if (migrated.growth && !migrated.growth.trustSignals.length) {
+        migrated.growth.trustSignals = getDefaultTrustSignals(data.metadata.name)
+      }
+      
+      return migrated as Product
+    }
+    
+    console.warn(`Invalid product data for ${slug}`)
+    return null
+  } catch (error) {
+    console.error(`Error loading product ${slug}:`, error)
     return null
   }
 }
 
-export function validateProductMetadata(data: unknown): ProductMetadata {
-  // Basic validation - can be enhanced with zod or similar
-  if (!data || typeof data !== 'object') {
-    throw new Error('Invalid product metadata')
+// Convert Product schema to ProductTemplateProps
+export function productToTemplateProps(product: Product): ProductTemplateProps {
+  return {
+    hero: {
+      name: product.metadata.name,
+      tagline: product.metadata.tagline,
+      status: product.metadata.status,
+      platforms: product.metadata.platforms,
+      heroImage: product.assets.heroImage,
+      demoVideo: product.assets.demoVideo,
+      primaryAction: product.links.primary,
+      secondaryAction: product.links.secondary,
+    },
+    problemSolution: {
+      problem: {
+        title: "The Challenge",
+        description: product.content.problemStatement,
+        painPoints: product.content.painPoints,
+      },
+      solution: {
+        title: "Our Solution",
+        description: product.content.solutionApproach,
+        benefits: product.content.benefits,
+      },
+    },
+    features: {
+      title: "Key Features",
+      description: `Discover how ${product.metadata.name} works`,
+      items: product.content.features,
+      layout: '3-column',
+    },
+    screenshots: product.assets.screenshots.length > 0 ? {
+      title: `${product.metadata.name} in Action`,
+      description: "See how it works in real-world scenarios",
+      images: product.assets.screenshots.map((src, index) => ({
+        src,
+        alt: `${product.metadata.name} screenshot ${index + 1}`,
+        caption: `Feature ${index + 1}`,
+      })),
+      navigation: 'both',
+    } : undefined,
+    availability: {
+      title: "Get Started Today",
+      description: `Experience ${product.metadata.name} for yourself`,
+      platforms: product.links.platforms,
+      comingSoon: product.links.comingSoon,
+    },
+    futureVision: product.content.roadmap ? {
+      title: "What's Next",
+      description: product.content.expansionVision,
+      roadmap: product.content.roadmap,
+    } : {
+      title: "The Vision",
+      description: product.content.expansionVision,
+    },
   }
-  
-  return data as ProductMetadata
+}
+
+// Get all product slugs for static generation
+export async function getAllProductSlugs(): Promise<string[]> {
+  const products = await getAllProducts()
+  return products.map(product => product.metadata.slug)
 }
