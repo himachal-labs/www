@@ -1,0 +1,138 @@
+---
+// Import content from migration
+const content = await import('../../migration_static/content/extracted_content.json');
+const company = content.default.company;
+---
+
+<section class="hero-loading gradient-bg section-padding" aria-labelledby="hero-heading">
+  <div class="container-center">
+    <div class="text-center max-w-4xl mx-auto">
+      <!-- Hero Headline -->
+      <h1 id="hero-heading" class="hero-text mb-6">
+        {company.tagline}
+      </h1>
+      
+      <!-- Supporting Message -->
+      <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+        {company.philosophy}
+      </p>
+      
+      <!-- Mission Statement -->
+      <p class="text-lg md:text-xl text-gray-700 mb-12 max-w-2xl mx-auto">
+        {company.mission}
+      </p>
+      
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a 
+          href="#products" 
+          class="btn-primary text-lg px-8 py-4"
+          aria-label="Explore our cognitive augmentation products"
+        >
+          Explore Our Products
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+        
+        <a 
+          href="#philosophy" 
+          class="btn-secondary text-lg px-8 py-4"
+          aria-label="Learn about our philosophy of complexity translation"
+        >
+          Our Philosophy
+        </a>
+      </div>
+      
+      <!-- Value Proposition Indicators -->
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="animate-fade-in">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Instant Understanding</h3>
+          <p class="text-gray-600">Complex decisions simplified in seconds, not hours</p>
+        </div>
+        
+        <div class="animate-fade-in" style="animation-delay: 0.2s;">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Your Values, Preserved</h3>
+          <p class="text-gray-600">AI that augments your judgment, never replaces it</p>
+        </div>
+        
+        <div class="animate-fade-in" style="animation-delay: 0.4s;">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Universal Access</h3>
+          <p class="text-gray-600">Cognitive augmentation as a human right</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <a 
+      href="#agency-crisis" 
+      class="text-gray-400 hover:text-primary-600 transition-colors duration-200 focus-ring rounded-full p-2"
+      aria-label="Learn about the agency crisis we're solving"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .hero-loading {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: shimmer 3s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-loading::before {
+      animation: none;
+    }
+    
+    .animate-bounce {
+      animation: none;
+    }
+    
+    .animate-fade-in {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>

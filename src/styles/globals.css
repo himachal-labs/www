@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  /* CSS Custom Properties for dynamic theming */
+  :root {
+    --color-primary: 59 130 246; /* primary-500 as RGB */
+    --color-secondary: 100 116 139; /* gray-500 as RGB */
+    --color-accent: 16 185 129; /* emerald-500 as RGB */
+    --color-warning: 245 158 11; /* amber-500 as RGB */
+    --color-error: 220 38 38; /* red-600 as RGB */
+    --color-success: 5 150 105; /* emerald-600 as RGB */
+  }
+
+  /* Typography scale following VastSilicon principles */
+  html {
+    @apply text-base;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-variation-settings: normal;
+  }
+
+  body {
+    @apply font-sans text-gray-900 bg-white antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Headings with proper hierarchy */
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl font-bold leading-tight tracking-tight;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl font-semibold leading-tight;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-semibold leading-tight;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl font-medium leading-tight;
+  }
+
+  h6 {
+    @apply text-base md:text-lg font-medium leading-tight;
+  }
+
+  /* Paragraph spacing for readability */
+  p {
+    @apply text-base md:text-lg leading-relaxed;
+  }
+
+  p + p {
+    @apply mt-4;
+  }
+
+  /* Links with proper focus states */
+  a {
+    @apply text-primary-600 hover:text-primary-700 transition-colors duration-200;
+  }
+
+  a:focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2 rounded;
+  }
+
+  /* Form elements */
+  input, textarea, select {
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500;
+  }
+
+  /* Button reset */
+  button {
+    @apply focus:outline-none;
+  }
+
+  /* Skip link for accessibility */
+  .skip-link {
+    @apply absolute -top-10 left-4 z-50 px-4 py-2 bg-primary-600 text-white rounded;
+    @apply focus:top-4 transition-all duration-200;
+  }
+}
+
+@layer components {
+  /* VastSilicon specific component styles */
+  .hero-text {
+    @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight;
+    background: linear-gradient(135deg, theme(colors.gray.900) 0%, theme(colors.primary.600) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  .gradient-bg {
+    background: linear-gradient(135deg, 
+      theme(colors.primary.50) 0%, 
+      theme(colors.white) 25%, 
+      theme(colors.gray.50) 100%);
+  }
+
+  /* Problem/Solution card pattern from docs */
+  .problem-solution-card {
+    @apply bg-white rounded-lg shadow-medium p-6 border border-gray-200 transition-all duration-300 hover:shadow-strong hover:border-primary-200;
+  }
+
+  .problem-solution-card::before {
+    content: '✗';
+    @apply absolute -top-2 -left-2 w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-semibold;
+  }
+
+  .problem-solution-card.solution::before {
+    content: '✓';
+    @apply bg-green-100 text-green-600;
+  }
+
+  /* Progressive disclosure pattern */
+  .expandable-section {
+    @apply transition-all duration-300 ease-in-out overflow-hidden;
+  }
+
+  .expandable-section:not(.expanded) {
+    @apply max-h-0;
+  }
+
+  .expandable-section.expanded {
+    @apply max-h-screen;
+  }
+
+  /* Status badges */
+  .status-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .status-badge.available {
+    @apply bg-green-100 text-green-800;
+  }
+
+  .status-badge.coming-soon {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+
+  .status-badge.beta {
+    @apply bg-blue-100 text-blue-800;
+  }
+
+  /* App Store badge styling */
+  .app-store-badge {
+    @apply inline-block w-40 h-auto transition-transform duration-200 hover:scale-105;
+  }
+
+  /* Device mockup containers */
+  .device-mockup {
+    @apply relative max-w-sm mx-auto;
+  }
+
+  .device-mockup img {
+    @apply w-full h-auto rounded-2xl shadow-strong;
+  }
+
+  /* Carousel navigation */
+  .carousel-nav {
+    @apply flex space-x-2 justify-center mt-4;
+  }
+
+  .carousel-dot {
+    @apply w-2 h-2 rounded-full bg-gray-300 transition-colors duration-200 cursor-pointer;
+  }
+
+  .carousel-dot.active {
+    @apply bg-primary-600;
+  }
+}
+
+@layer utilities {
+  /* Performance optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+
+  /* Accessibility utilities */
+  .screen-reader-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Focus management */
+  .focus-trap {
+    @apply focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 rounded;
+  }
+
+  /* Loading states */
+  .loading-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200px 0; }
+    100% { background-position: calc(200px + 100%) 0; }
+  }
+
+  /* Print styles */
+  @media print {
+    .no-print {
+      @apply hidden;
+    }
+    
+    .print-only {
+      @apply block;
+    }
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .hero-text {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    @apply text-gray-900;
+  }
+}

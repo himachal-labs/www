@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import AgencyCrisis from '../components/AgencyCrisis.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
+import Philosophy from '../components/Philosophy.astro';
+import Footer from '../components/Footer.astro';
+
+// Import content for meta tags
+const content = await import('../../migration_static/content/extracted_content.json');
+const { company } = content.default;
+
+const title = `${company.name} - ${company.tagline}`;
+const description = `${company.mission}. ${company.philosophy}`;
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="main-content">
+    <!-- Navigation -->
+    <Navigation />
+    
+    <!-- Hero Section -->
+    <Hero />
+    
+    <!-- Agency Crisis Section -->
+    <AgencyCrisis />
+    
+    <!-- Product Showcase -->
+    <ProductShowcase />
+    
+    <!-- Philosophy Section -->
+    <Philosophy />
+  </main>
+  
+  <!-- Footer -->
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Ensure smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+</style>
