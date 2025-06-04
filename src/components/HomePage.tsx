@@ -1,21 +1,15 @@
 'use client'
 
 import TrustSignals, { vastSiliconTrustSignals } from '@/components/trust/TrustSignals'
-import { useABTest } from '@/components/ab-testing/ABTestProvider'
-import { TimeOnPageTracker, PhilosophyEngagementTracker } from '@/components/ab-testing/ConversionTracker'
 
 export default function HomePage() {
-  const heroTest = useABTest('hero_message_clarity')
-  const trustSignalTest = useABTest('trust_signal_placement')
-
-  const heroConfig = heroTest.config || {
+  const heroConfig = {
     heroTitle: 'Stop guessing. Start knowing.',
     heroSubtitle: 'We don\'t simplify your world. We make it comprehensible. Complexity isn\'t the problem—it\'s potential waiting for translation.'
   }
 
   return (
     <>
-      <TimeOnPageTracker pageName="homepage" threshold={30000} />
       
       {/* Hero Section - Philosophy Demonstration */}
       <section className="container mx-auto px-4 py-20">
@@ -50,10 +44,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trust Signals - A/B test placement */}
-      {trustSignalTest.config?.trustSignalPlacement === 'below_hero' && (
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
+      {/* Trust Signals */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
                 Trusted by Those Who Value Agency
@@ -65,24 +58,10 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-      )}
 
       {/* Products Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
-          {/* Trust Signals - Alternative placement */}
-          {trustSignalTest.config?.trustSignalPlacement === 'above_products' && (
-            <div className="mb-16">
-              <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-                Trusted by Those Who Value Agency
-              </h2>
-              <TrustSignals 
-                signals={vastSiliconTrustSignals} 
-                layout="grid"
-                className="mb-16"
-              />
-            </div>
-          )}
 
           <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">
             Agency Restoration in Action
@@ -125,22 +104,20 @@ export default function HomePage() {
       </section>
 
       {/* Vision Section */}
-      <PhilosophyEngagementTracker>
-        <section className="bg-gray-900 text-white py-20">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl font-bold mb-8">
-                Building Cognitive Infrastructure for the Next Century
-              </h2>
-              <p className="text-xl text-gray-300 leading-relaxed">
-                Every domain where complexity has overwhelmed choice is an opportunity 
-                to restore human agency. Food, finance, health, technology—the pattern scales. 
-                Cognitive augmentation as a human right.
-              </p>
-            </div>
+      <section className="bg-gray-900 text-white py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-8">
+              Building Cognitive Infrastructure for the Next Century
+            </h2>
+            <p className="text-xl text-gray-300 leading-relaxed">
+              Every domain where complexity has overwhelmed choice is an opportunity 
+              to restore human agency. Food, finance, health, technology—the pattern scales. 
+              Cognitive augmentation as a human right.
+            </p>
           </div>
-        </section>
-      </PhilosophyEngagementTracker>
+        </div>
+      </section>
     </>
   )
 }

@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google'
 import { generateOrganizationSchema } from '@/lib/schema'
 import AnalyticsProvider from '@/components/analytics/AnalyticsProvider'
 import PlausibleScript from '@/components/analytics/PlausibleScript'
-import FeatureFlagProvider from '@/components/ab-testing/ABTestProvider'
 import PerformanceOptimizer, { CriticalCSS, ResourceHints } from '@/components/performance/PerformanceOptimizer'
 import './globals.css'
 
@@ -84,10 +83,8 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <PlausibleScript />
         <AnalyticsProvider>
-          <FeatureFlagProvider>
-            <PerformanceOptimizer />
-            {children}
-          </FeatureFlagProvider>
+          <PerformanceOptimizer />
+          {children}
         </AnalyticsProvider>
       </body>
     </html>
