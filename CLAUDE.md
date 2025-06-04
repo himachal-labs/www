@@ -35,7 +35,7 @@ When starting work, read the documentation in `/docs/new_web/` in this order:
 ## Caution: (Visibility in Repeated issues for help)
 - Never write timelines or project phases or anything related when creating documentation.
 - Never write Create by Claude in git commits.
-- 
+- NEVER include "🤖 Generated with [Claude Code]" or "Co-Authored-By: Claude" in commit messages.
 
 ## Development Approach
 
