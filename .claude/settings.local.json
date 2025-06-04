@@ -24,7 +24,12 @@
       "Bash(chmod:*)",
       "Bash(./scripts/workingtree.sh:*)",
       "Bash(git stash:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm init:*)",
+      "Bash(npx tailwindcss init:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npm run lint)",
+      "Bash(touch:*)"
     ],
     "deny": []
   }
