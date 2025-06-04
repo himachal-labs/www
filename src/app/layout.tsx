@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { generateOrganizationSchema } from '@/lib/schema'
 import AnalyticsProvider from '@/components/analytics/AnalyticsProvider'
-import PlausibleScript from '@/components/analytics/PlausibleScript'
+import { Analytics } from '@vercel/analytics/react'
 import PerformanceOptimizer, { CriticalCSS, ResourceHints } from '@/components/performance/PerformanceOptimizer'
 import './globals.css'
 
@@ -81,7 +81,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <PlausibleScript />
+        <Analytics />
         <AnalyticsProvider>
           <PerformanceOptimizer />
           {children}

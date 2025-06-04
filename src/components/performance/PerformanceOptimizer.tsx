@@ -60,103 +60,81 @@ export default function PerformanceOptimizer() {
       if ('performance' in window && 'PerformanceObserver' in window) {
         // Monitor Core Web Vitals
         import('web-vitals').then(({ onCLS, onINP, onFCP, onLCP, onTTFB }) => {
-          onCLS(metric => {
-            if (window.plausible) {
-              window.plausible('Core Web Vital', {
-                props: {
-                  metric: 'CLS',
-                  value: metric.value,
-                  rating: metric.rating
-                }
+          import('@vercel/analytics').then(({ track }) => {
+            onCLS(metric => {
+              track('Core Web Vital', {
+                metric: 'CLS',
+                value: metric.value,
+                rating: metric.rating
               })
-            }
-          })
+            })
 
-          onINP(metric => {
-            if (window.plausible) {
-              window.plausible('Core Web Vital', {
-                props: {
-                  metric: 'INP',
-                  value: metric.value,
-                  rating: metric.rating
-                }
+            onINP(metric => {
+              track('Core Web Vital', {
+                metric: 'INP',
+                value: metric.value,
+                rating: metric.rating
               })
-            }
-          })
+            })
 
-          onFCP(metric => {
-            if (window.plausible) {
-              window.plausible('Core Web Vital', {
-                props: {
-                  metric: 'FCP',
-                  value: metric.value,
-                  rating: metric.rating
-                }
+            onFCP(metric => {
+              track('Core Web Vital', {
+                metric: 'FCP',
+                value: metric.value,
+                rating: metric.rating
               })
-            }
-          })
+            })
 
-          onLCP(metric => {
-            if (window.plausible) {
-              window.plausible('Core Web Vital', {
-                props: {
-                  metric: 'LCP',
-                  value: metric.value,
-                  rating: metric.rating
-                }
+            onLCP(metric => {
+              track('Core Web Vital', {
+                metric: 'LCP',
+                value: metric.value,
+                rating: metric.rating
               })
-            }
-          })
+            })
 
-          onTTFB(metric => {
-            if (window.plausible) {
-              window.plausible('Core Web Vital', {
-                props: {
-                  metric: 'TTFB',
-                  value: metric.value,
-                  rating: metric.rating
-                }
+            onTTFB(metric => {
+              track('Core Web Vital', {
+                metric: 'TTFB',
+                value: metric.value,
+                rating: metric.rating
               })
-            }
+            })
           })
         })
 
         // Monitor Long Tasks
         const longTaskObserver = new PerformanceObserver(list => {
-          for (const entry of list.getEntries()) {
-            if (entry.duration > 50) {
-              if (window.plausible) {
-                window.plausible('Long Task', {
-                  props: {
-                    duration: Math.round(entry.duration),
-                    start_time: Math.round(entry.startTime)
-                  }
+          import('@vercel/analytics').then(({ track }) => {
+            for (const entry of list.getEntries()) {
+              if (entry.duration > 50) {
+                track('Long Task', {
+                  duration: Math.round(entry.duration),
+                  start_time: Math.round(entry.startTime)
                 })
               }
             }
-          }
+          })
         })
 
         longTaskObserver.observe({ entryTypes: ['longtask'] })
 
         // Monitor Resource Loading
         const resourceObserver = new PerformanceObserver(list => {
-          for (const entry of list.getEntries()) {
-            const resource = entry as PerformanceResourceTiming
-            
-            // Track slow resources
-            if (resource.duration > 1000) {
-              if (window.plausible) {
-                window.plausible('Slow Resource', {
-                  props: {
-                    resource_name: resource.name.split('/').pop() || 'unknown',
-                    duration: Math.round(resource.duration),
-                    resource_type: resource.initiatorType
-                  }
+          import('@vercel/analytics').then(({ track }) => {
+            for (const entry of list.getEntries()) {
+              const resource = entry as PerformanceResourceTiming
+              
+              // Track slow resources
+              if (resource.duration > 1000) {
+                track('Slow Resource', {
+                  resource_name: resource.name.split('/').pop() || 'unknown',
+                  duration: Math.round(resource.duration),
+                  resource_type: resource.initiatorType
                 })
               }
             }
-          }
+          })
         })
 
         resourceObserver.observe({ entryTypes: ['resource'] })
@@ -224,7 +202,7 @@ export function ResourceHints() {
   return (
     <>
       {/* DNS prefetch for external domains */}
-      <link rel="dns-prefetch" href="//plausible.io" />
+      <link rel="dns-prefetch" href="//vercel.live" />
       
       {/* Preconnect to critical external resources */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />

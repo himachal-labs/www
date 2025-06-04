@@ -1,11 +1,8 @@
 // Simple privacy-first analytics for VastSilicon
 // Essential tracking only, aligned with agency restoration philosophy
 
-declare global {
-  interface Window {
-    plausible?: (event: string, options?: { props?: Record<string, string | number> }) => void
-  }
-}
+import { track } from '@vercel/analytics'
+
 
 export interface AnalyticsEvent {
   name: string
@@ -14,10 +11,8 @@ export interface AnalyticsEvent {
 
 // Simple analytics functions
 export function trackEvent(event: AnalyticsEvent): void {
-  if (typeof window !== 'undefined' && window.plausible) {
-    window.plausible(event.name, {
-      props: event.properties
-    })
+  if (typeof window !== 'undefined') {
+    track(event.name, event.properties)
   }
 }
 

@@ -15,7 +15,7 @@ Key technology and architecture choices for the VastSilicon website.
 
 **Alternatives considered**: Astro (better performance but worse DX for content), 11ty (too simple), Gatsby (too complex)
 
-**Reference**: See [ADR-001](adrs/001-tech-stack-for-product-portfolio-site.md) for detailed analysis
+**Reference**: See [ADR-001](../adrs/001-tech-stack-for-product-portfolio-site.md) for detailed analysis
 
 ### CSS Framework: Tailwind CSS
 **Decision**: Use Tailwind for styling  
