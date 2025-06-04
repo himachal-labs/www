@@ -29,7 +29,10 @@
       "Bash(npx tailwindcss init:*)",
       "Bash(npm run type-check:*)",
       "Bash(npm run lint)",
-      "Bash(touch:*)"
+      "Bash(touch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git worktree:*)",
+      "Bash(git push:*)"
     ],
     "deny": []
   }
