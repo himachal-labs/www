@@ -32,7 +32,17 @@
       "Bash(touch:*)",
       "Bash(git checkout:*)",
       "Bash(git worktree:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(find:*)",
+      "Bash(npm run lighthouse:*)",
+      "Bash(npm run:*)",
+      "Bash(npm --prefix /Users/mohil/codebase/internal/design run type-check)",
+      "Bash(npm --prefix /Users/mohil/codebase/internal/design run build)",
+      "Bash(npm:*)",
+      "Bash(npx next-bundle-analyzer:*)",
+      "Bash(npx webpack-bundle-analyzer:*)",
+      "Bash(npx lighthouse:*)",
+      "Bash(cat:*)"
     ],
     "deny": []
   }

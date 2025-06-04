@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getProductBySlug, getAllProducts } from '@/lib/products'
+import { generateProductSchema } from '@/lib/schema'
+import TrustSignals, { productTrustSignals } from '@/components/trust/TrustSignals'
+import TransparencySection, { choiceCheckTransparency, moneyTideTransparency } from '@/components/trust/TransparencySection'
 import type { Metadata } from 'next'
 
 interface ProductPageProps {
@@ -15,9 +18,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
   if (!product) {
     notFound()
   }
+
+  const productSchema = generateProductSchema(product)
+  const trustSignals = productTrustSignals[product.slug as keyof typeof productTrustSignals] || []
+  const transparencyItems = product.slug === 'choicecheck' ? choiceCheckTransparency : 
+                           product.slug === 'moneytide' ? moneyTideTransparency : []
   
   return (
     <main className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema, null, 2),
+        }}
+      />
       {/* Product Hero */}
       <section className="bg-gradient-to-b from-gray-50 to-white py-20">
         <div className="container mx-auto px-4">
@@ -150,6 +164,33 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </section>
       )}
 
+      {/* Trust Signals */}
+      {trustSignals.length > 0 && (
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+                Trusted & Transparent
+              </h2>
+              <TrustSignals 
+                signals={trustSignals} 
+                layout="grid"
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Transparency Section */}
+      {transparencyItems.length > 0 && (
+        <TransparencySection
+          title="How It Works"
+          subtitle="Complete transparency in our methodology, data sources, and limitations."
+          items={transparencyItems}
+          className="bg-gray-50"
+        />
+      )}
+
       {/* Back to Home */}
       <section className="py-16">
         <div className="container mx-auto px-4 text-center">
@@ -188,10 +229,37 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   return {
     title: `${product.name} - ${product.tagline} | VastSilicon`,
     description: product.description,
+    keywords: [
+      product.name.toLowerCase(),
+      `${product.name.toLowerCase()} app`,
+      'AI decision making',
+      'cognitive augmentation',
+      ...(product.name.toLowerCase() === 'choicecheck' ? ['food analysis', 'nutrition AI', 'healthy eating'] : []),
+      ...(product.name.toLowerCase() === 'moneytide' ? ['personal finance', 'money management', 'financial clarity'] : [])
+    ],
+    alternates: {
+      canonical: `https://vastsilicon.com/products/${product.slug}`,
+    },
     openGraph: {
       title: `${product.name} - ${product.tagline}`,
       description: product.description,
-      images: product.hero.image ? [product.hero.image] : [],
+      type: 'website',
+      url: `https://vastsilicon.com/products/${product.slug}`,
+      siteName: 'VastSilicon',
+      images: product.hero.image ? [
+        {
+          url: `https://vastsilicon.com${product.hero.image}`,
+          width: 1200,
+          height: 630,
+          alt: `${product.name} app interface`,
+        }
+      ] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.name} - ${product.tagline}`,
+      description: product.description,
+      images: product.hero.image ? [`https://vastsilicon.com${product.hero.image}`] : [],
     },
   }
 }
