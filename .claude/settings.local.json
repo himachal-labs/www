@@ -22,7 +22,9 @@
       "WebFetch(domain:github.com)",
       "Bash(git worktree:*)",
       "Bash(chmod:*)",
-      "Bash(./scripts/workingtree.sh:*)"
+      "Bash(./scripts/workingtree.sh:*)",
+      "Bash(git stash:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
