@@ -42,7 +42,19 @@
       "Bash(npx next-bundle-analyzer:*)",
       "Bash(npx webpack-bundle-analyzer:*)",
       "Bash(npx lighthouse:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "WebFetch(domain:vastsilicon.com)",
+      "WebFetch(domain:choicecheck.vastsilicon.com)",
+      "WebFetch(domain:moneytide.vastsilicon.com)",
+      "Bash(git remote set-url:*)",
+      "Bash(gh repo view:*)",
+      "WebFetch(domain:himachal-labs.github.io)",
+      "Bash(gh:*)",
+      "Bash(mv:*)",
+      "Bash(git rm:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(git reset:*)",
+      "WebFetch(domain:docs.github.com)"
     ],
     "deny": []
   }
