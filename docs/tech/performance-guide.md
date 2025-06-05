@@ -282,7 +282,7 @@ npm run build
 
 ### Performance CI/CD
 ```yaml
-# Example GitHub Actions performance check
+# Example CI performance check
 - name: Performance Audit
   run: |
     npm run build
