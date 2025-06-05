@@ -119,7 +119,7 @@ Build for long-term maintainability. Choose technologies and patterns that will 
 **Simple Branch-Based Deployment (Recommended):**
 1. Repository Settings → Pages
 2. Source: "Deploy from a branch"
-3. Branch: `main`, Folder: `/github-docs`
+3. Branch: `main`, Folder: `/docs` (GitHub Pages only supports `/` or `/docs`)
 4. Documentation available at: `https://himachal-labs.github.io/www`
 
 **Never use custom GitHub Actions workflows for standard Jekyll sites.** GitHub's built-in Jekyll processing handles all common use cases.
