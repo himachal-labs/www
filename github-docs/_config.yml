@@ -1,0 +1,25 @@
+title: Himachal Labs Documentation
+description: Technical documentation and organizational procedures
+baseurl: "/www"
+url: "https://himachal-labs.github.io"
+
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+exclude:
+  - README.md
+  - LICENSE
+  - .gitignore
+  - node_modules
+  - package.json
+  - package-lock.json
+
+collections:
+  github:
+    output: true
+    permalink: /:collection/:name/
