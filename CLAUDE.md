@@ -51,6 +51,7 @@ When choosing technologies, evaluate against:
 - **Progressive Enhancement**: Core functionality without JavaScript, enhanced with it
 - **Performance Budget**: Every byte must justify itself
 - **Proven Technology**: Choose stable, well-supported solutions
+- **Simplicity First**: Use existing tools and standard approaches, never custom solutions without explicit approval
 
 ### Component Development
 Every component should:
@@ -112,3 +113,13 @@ When developing, use these commands:
 ## Development Standards
 
 Build for long-term maintainability. Choose technologies and patterns that will remain stable and supportable.
+
+## GitHub Pages Setup
+
+**Simple Branch-Based Deployment (Recommended):**
+1. Repository Settings → Pages
+2. Source: "Deploy from a branch"
+3. Branch: `main`, Folder: `/.github-pages`
+4. Documentation available at: `https://himachal-labs.github.io/www`
+
+**Never use custom GitHub Actions workflows for standard Jekyll sites.** GitHub's built-in Jekyll processing handles all common use cases.
