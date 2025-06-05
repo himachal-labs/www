@@ -1,93 +1,64 @@
-# VastSilicon Website
-
-Content-driven product portfolio website built with Next.js. Showcases VastSilicon company and products (MoneyTide, ChoiceCheck, future apps) with template-based expandability.
+# VastSilicon Website - Technical Documentation
 
 ## Quick Start
 
 ```bash
+git clone <repository>
+cd www
 npm install
 npm run dev
 ```
 
-Open http://localhost:3000
+Open [http://localhost:3000](http://localhost:3000) to view the website.
 
-## Content-Driven Architecture
+## Documentation Structure
 
-This site is designed for easy product additions:
+| Document | Purpose | Audience |
+|----------|---------|----------|
+| [Getting Started](getting-started.md) | Quick setup and first contribution | New developers |
+| [Development Guide](development-guide.md) | Day-to-day development workflows | Active contributors |
+| [API Reference](api-reference.md) | Component interfaces and schemas | All developers |
+| [Architecture](architecture.md) | System design and decisions | Technical leads |
+| [Deployment Guide](deployment-guide.md) | Production deployment procedures | DevOps engineers |
+| [Performance Guide](performance-guide.md) | Optimization guidelines and targets | Performance engineers |
+| [Monitoring](monitoring.md) | Analytics and performance tracking | Operations team |
+| [Troubleshooting](troubleshooting.md) | Common issues and solutions | Support team |
 
-1. **Add product content**: Create MDX file in `content/products/`
-2. **Add assets**: Images/videos in `public/images/[product]/` 
-3. **Deploy**: New product page automatically generated
+## Project Overview
 
-Example product addition:
-```typescript
-// content/products/new-app.mdx
-export const metadata = {
-  name: "NewApp",
-  tagline: "Clear value proposition",
-  status: "coming-soon",
-  platforms: ["ios", "android"],
-  primaryColor: "#1E40AF"
-}
+Next.js static website with:
+- **Framework**: Next.js 15 with App Router
+- **Styling**: Tailwind CSS with custom design system
+- **Content**: MDX-based product and blog content
+- **Deployment**: Static export to Vercel
+- **Analytics**: Vercel Analytics with Core Web Vitals tracking
 
-# Product Vision
-Your product description here...
-```
+## Key Technologies
 
-## Documentation
-
-Read these docs in order based on what you need:
-
-| Document | When to read | Purpose |
-|----------|--------------|---------|
-| [DECISIONS.md](DECISIONS.md) | Before starting work | Understand technology choices |
-| [SETUP.md](SETUP.md) | Setting up dev environment | Get development running |
-| [DEVELOPMENT.md](DEVELOPMENT.md) | Building features | Day-to-day development workflow |
-| [PERFORMANCE.md](PERFORMANCE.md) | During development | Performance requirements reference |
-| [DEPLOYMENT.md](DEPLOYMENT.md) | Shipping to production | Release process |
-
-## Project Goals
-
-- **<1s load time globally** - Demonstrate infrastructure competence
-- **100/100 Lighthouse scores** - Prove attention to detail  
-- **Universal accessibility** - WCAG AA compliance minimum
-- **Multi-app architecture** - Support MoneyTide + ChoiceCheck + future apps
-
-## Commands
-
-```bash
-npm run dev          # Development server
-npm run build        # Production build
-npm run preview      # Preview production build
-npm run test         # Run tests
-npm run lint         # Code linting
-npm run deploy       # Deploy to production
-```
+- **Next.js 15**: React framework with App Router
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first styling
+- **MDX**: Markdown with JSX for content
+- **Vercel Analytics**: Performance and usage tracking
 
 ## Project Structure
 
 ```
 src/
-├── app/                    # Next.js app directory
-│   ├── page.tsx           # Homepage  
-│   ├── products/[slug]/   # Dynamic product pages
-│   └── about/             # Company pages
-├── components/
-│   ├── product/           # Product page templates
-│   ├── ui/               # Shared UI components
-│   └── layout/           # Layout components
-├── content/
-│   ├── products/         # Product MDX files
-│   └── pages/            # Page content
-└── lib/                  # Utilities and content processing
-
-public/
-├── images/[product]/     # Product assets
-└── ...                   # Static files
+├── app/                    # Next.js App Router pages
+├── components/             # React components
+├── content/               # MDX content files
+├── lib/                   # Utility functions and schemas
+└── public/               # Static assets
 ```
 
-## Need Help?
+## Common Commands
 
-1. Check if your question is answered in the docs above
-2. Look for similar issues in the codebase
-3. Ask the team in chat/meetings
+```bash
+npm run dev          # Development server
+npm run build        # Production build
+npm run lint         # Code linting
+npm run type-check   # TypeScript validation
+```
+
+For detailed information, see the specific documentation sections linked above.

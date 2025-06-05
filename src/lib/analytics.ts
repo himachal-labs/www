@@ -1,5 +1,5 @@
 // Simple privacy-first analytics for VastSilicon
-// Essential tracking only, aligned with agency restoration philosophy
+// Essential tracking only
 
 import { track } from '@vercel/analytics'
 

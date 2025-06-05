@@ -16,7 +16,6 @@ When starting work, read the documentation in `/docs/new_web/` in this order:
 
 1. **00-start-here.md** - Overview and context
 2. **01-core-philosophy-objectives.md** - What we're building and why
-3. **08-agency-restoration-framework.md** - Central principle guiding everything
 4. **02-design-principles.md** - Visual and interaction guidelines
 5. **03-technical-architecture-principles.md** - Technical approach
 6. **04-content-strategy.md** - Content organization and voice
@@ -28,17 +27,15 @@ When starting work, read the documentation in `/docs/new_web/` in this order:
 
 ### Prohibited Behaviors
 - **NEVER write timelines, project phases, or time estimates** - You have no basis for time speculation
-- **NEVER write "Create by Claude" in git commits**
-- **NEVER include "🤖 Generated with [Claude Code]" or "Co-Authored-By: Claude" in commit messages**
+- **NEVER include "Create by Claude" OR "🤖 Generated with [Claude Code]" or "Co-Authored-By: Claude" in commit messages**
 - **NEVER use undefined business jargon** like "growth + agency principles" without clear definition
-- **NEVER make implementation recommendations without explicit authorization**
 
 ### Expert Contractor Standards
 - Provide technical analysis without timeline speculation
 - Document architectural decisions clearly without buzzwords
 - Focus on what exists, what's missing, and technical trade-offs
 - Present options and implications, not predetermined solutions
-- Assume client expertise and avoid condescending explanations
+- Assume client expertise
 
 ## Development Approach
 

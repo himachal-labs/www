@@ -10,7 +10,6 @@
 VastSilicon's website development has progressed along two parallel tracks:
 
 1. **Main Branch**: Implemented growth optimization infrastructure (ADR-002) with analytics, A/B testing, trust signals, and performance optimization
-2. **Design Worktree**: Proposed Agency-First Design System architecture focused on complexity translation and philosophical consistency
 
 Both implementations are partially complete and need unified integration to avoid overengineering while maintaining VastSilicon's core philosophy.
 
@@ -30,7 +29,6 @@ Both implementations are partially complete and need unified integration to avoi
 - Product template framework via MDX
 - Component directory structure exists but largely empty
 
-**❌ Agency-First Patterns (Missing)**
 - Atomic component library
 - Progressive disclosure UI patterns
 - Complexity translation demonstrations
@@ -38,13 +36,13 @@ Both implementations are partially complete and need unified integration to avoi
 
 ## Decision
 
-**Implement a pragmatic merger that integrates Agency-First Design principles with existing growth infrastructure, avoiding overengineering while enabling rapid product scaling.**
+**Implement a pragmatic merger with existing growth infrastructure, avoiding overengineering while enabling rapid product scaling.**
 
 ## Unified Strategy Framework
 
 ### 1. Design System Foundation (Enhance Existing)
 
-Rather than rebuilding, we'll enhance the current Tailwind configuration to support Agency-First principles:
+Rather than rebuilding, we'll enhance the current Tailwind configuration:
 
 ```javascript
 // Enhanced tailwind.config.js (minimal but complete)
