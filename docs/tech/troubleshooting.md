@@ -188,6 +188,43 @@ import Image from 'next/image'
    <Button variant="primary">Click me</Button>
    ```
 
+## Platform Integration Issues
+
+### Apple App Site Association (AASA) Problems
+
+**Problem**: Universal Links not working
+
+**Common issues**:
+
+1. **AASA file not found (404)**:
+   ```bash
+   # Verify files exist in public directory
+   ls -la public/.well-known/apple-app-site-association
+   ls -la public/apple-app-site-association
+   ```
+
+2. **Invalid JSON structure**:
+   ```bash
+   # Validate JSON syntax
+   jq . public/.well-known/apple-app-site-association
+   ```
+
+3. **Wrong Content-Type header**:
+   - Expected: `application/json`
+   - Check server configuration
+   - Verify no redirects on AASA paths
+
+4. **Apple validation failing**:
+   - Test: https://search.developer.apple.com/appsearch-validation-tool/
+   - Enter domain: `vastsilicon.com`
+   - Ensure HTTPS certificate is valid
+
+**Debug steps**:
+1. Clear Safari cache and test again
+2. Verify app installed with correct Team ID
+3. Check iOS device logs for Universal Link errors
+4. Ensure domain matches exactly (no www vs non-www issues)
+
 ## Performance Issues
 
 ### Bundle Size Too Large

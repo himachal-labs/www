@@ -4,6 +4,7 @@ import { generateOrganizationSchema } from '@/lib/schema'
 import AnalyticsProvider from '@/components/analytics/AnalyticsProvider'
 import { Analytics } from '@vercel/analytics/react'
 import PerformanceOptimizer, { CriticalCSS, ResourceHints } from '@/components/performance/PerformanceOptimizer'
+import { ThemeProvider } from '@/components/theme'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -82,10 +83,12 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased`}>
         <Analytics />
-        <AnalyticsProvider>
-          <PerformanceOptimizer />
-          {children}
-        </AnalyticsProvider>
+        <ThemeProvider defaultTheme="light">
+          <AnalyticsProvider>
+            <PerformanceOptimizer />
+            {children}
+          </AnalyticsProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

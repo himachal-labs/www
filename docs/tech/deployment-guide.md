@@ -189,6 +189,41 @@ git push origin maintenance
 vercel --prod
 ```
 
+## Platform-Specific Deployments
+
+### Apple App Site Association (AASA) Verification
+
+AASA files must be deployed correctly for Universal Links to function.
+
+#### Pre-Deployment Validation
+```bash
+# Verify AASA files exist in public directory
+ls -la public/.well-known/apple-app-site-association
+ls -la public/apple-app-site-association
+
+# Validate JSON structure
+jq . public/.well-known/apple-app-site-association
+```
+
+#### Post-Deployment Testing
+```bash
+# Test AASA endpoints
+curl -i https://vastsilicon.com/.well-known/apple-app-site-association
+curl -i https://vastsilicon.com/apple-app-site-association
+
+# Expected: 200 OK with application/json Content-Type
+```
+
+#### Apple Validation
+1. **Apple Validator**: https://search.developer.apple.com/appsearch-validation-tool/
+2. **Domain**: Enter `vastsilicon.com`
+3. **Verify**: AASA file detected and valid
+
+#### Universal Link Testing
+- Install MoneyTide app from App Store
+- Test links: `/invite/friend/test`, `/invite/group/test`, `/process-receipt/test`
+- Verify app opens instead of browser
+
 ## Domain Configuration
 
 ### DNS Settings
@@ -238,10 +273,52 @@ npx @next/bundle-analyzer
 # Vercel Analytics → Performance tab
 ```
 
-### DNS Issues
+### DNS Configuration Issues
+
+#### Basic DNS Troubleshooting
 - **Check DNS propagation**: Use online DNS checker tools
 - **Verify CNAME**: Should point to `cname.vercel-dns.com`
 - **Clear DNS cache**: `ipconfig /flushdns` (Windows) or `sudo dscacheutil -flushcache` (Mac)
+
+#### Advanced DNS Setup (Cloudflare)
+
+**For complex DNS configurations requiring Cloudflare management:**
+
+**Required DNS Records:**
+```bash
+# Apex domain A records (GitHub Pages IPs)
+Type: A, Name: @, Content: 185.199.108.153
+Type: A, Name: @, Content: 185.199.109.153  
+Type: A, Name: @, Content: 185.199.110.153
+Type: A, Name: @, Content: 185.199.111.153
+
+# WWW subdomain CNAME
+Type: CNAME, Name: www, Content: [repository].github.io
+
+# All records: Proxy Status = DNS only (gray cloud)
+```
+
+**Configuration Steps:**
+1. **Remove conflicting records**: Clear existing A/CNAME records
+2. **Add GitHub Pages IPs**: Official IPs from GitHub documentation
+3. **Configure www subdomain**: CNAME pointing to GitHub Pages
+4. **Disable Cloudflare proxy**: Must be DNS only for GitHub Pages
+5. **Verify with Apple validator**: If using AASA files
+
+**Verification Commands:**
+```bash
+# Check apex domain DNS
+dig [domain.com] A
+# Should return: 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153
+
+# Check www subdomain
+dig www.[domain.com] CNAME
+# Should return: [repository].github.io
+
+# Test all URL combinations
+curl -s -o /dev/null -w "%{http_code}" https://[domain.com]
+curl -s -o /dev/null -w "%{http_code}" https://www.[domain.com]
+```
 
 ### SSL Certificate Issues
 - **Check certificate**: Browser developer tools → Security tab

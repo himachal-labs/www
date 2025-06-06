@@ -50,19 +50,19 @@ graph TB
 ### Core Components
 
 ```mermaid
-graph LR
-    subgraph "Layout Layer"
+flowchart TD
+    subgraph Layout["📄 Layout Layer"]
         A[layout.tsx] --> B[Analytics Component]
         A --> C[PerformanceOptimizer]
     end
     
-    subgraph "Business Layer"
+    subgraph Business["🏢 Business Layer"]
         D[HomePage] --> E[trackAppStoreClick]
         F[ProductPage] --> E
         G[BlogPage] --> E
     end
     
-    subgraph "Analytics Layer"
+    subgraph Analytics["📊 Analytics Layer"]
         B --> H[Automatic Pageviews]
         C --> I[Core Web Vitals]
         C --> J[Performance Events]
@@ -74,15 +74,20 @@ graph LR
         K --> L
     end
     
-    subgraph "SDK Layer"
-        L --> M[@vercel/analytics track()]
+    subgraph SDK["🔧 SDK Layer"]
+        L --> M["@vercel/analytics track()"]
         M --> N[Vercel Infrastructure]
     end
     
-    style A fill:#e3f2fd
-    style L fill:#f1f8e9
-    style M fill:#fce4ec
-    style N fill:#fff8e1
+    classDef layout fill:#e3f2fd,stroke:#1976d2
+    classDef analytics fill:#f1f8e9,stroke:#388e3c
+    classDef sdk fill:#fce4ec,stroke:#c2185b
+    classDef infra fill:#fff8e1,stroke:#f57c00
+    
+    class A,B,C layout
+    class L analytics
+    class M sdk
+    class N infra
 ```
 
 ## Data Flow Architecture
@@ -129,36 +134,42 @@ sequenceDiagram
 ### Event Classification
 
 ```mermaid
-graph TD
-    A[All Events] --> B[Automatic Events]
-    A --> C[Custom Events]
+flowchart TD
+    A["🎯 All Events"] --> B["🤖 Automatic Events"]
+    A --> C["✋ Custom Events"]
     
     B --> D[pageview]
-    B --> E[Navigation events]
+    B --> E["navigation events"]
     
-    C --> F[Business Events]
-    C --> G[Performance Events]
+    C --> F["💼 Business Events"]
+    C --> G["⚡ Performance Events"]
     
     F --> H[app_store_click]
     F --> I[content_engagement]
     
-    G --> J[Core Web Vital]
-    G --> K[Long Task]
-    G --> L[Slow Resource]
+    G --> J["Core Web Vital"]
+    G --> K["Long Task"]
+    G --> L["Slow Resource"]
     
-    subgraph "Event Properties"
-        H --> M[product: string]
-        H --> N[platform: ios|android]
+    subgraph Props["📋 Event Properties"]
+        direction TB
+        H --> M["product: string"]
+        H --> N["platform: ios|android"]
         
-        J --> O[metric: LCP|CLS|INP|FCP|TTFB]
-        J --> P[value: number]
-        J --> Q[rating: good|needs-improvement|poor]
+        J --> O["metric: LCP|CLS|INP|FCP|TTFB"]
+        J --> P["value: number"]
+        J --> Q["rating: good|needs-improvement|poor"]
     end
     
-    style B fill:#e8f5e8
-    style C fill:#e1f5fe
-    style F fill:#fff3e0
-    style G fill:#fce4ec
+    classDef auto fill:#e8f5e8,stroke:#4caf50
+    classDef custom fill:#e1f5fe,stroke:#2196f3
+    classDef business fill:#fff3e0,stroke:#ff9800
+    classDef performance fill:#fce4ec,stroke:#e91e63
+    
+    class B auto
+    class C custom
+    class F business
+    class G performance
 ```
 
 ## Technical Integration
@@ -203,20 +214,20 @@ graph TB
 ### Event Tracking Pattern
 
 ```mermaid
-graph LR
-    subgraph "Standard Pattern"
+flowchart TD
+    subgraph Standard["Standard Pattern"]
         A[User Action] --> B[Event Handler]
-        B --> C[trackEvent()]
+        B --> C[trackEvent]
         C --> D[Vercel SDK]
     end
     
-    subgraph "Performance Pattern"
+    subgraph Performance["Performance Pattern"]
         E[Performance API] --> F[Observer Callback]
         F --> G[Dynamic Import Analytics]
         G --> H[Track Performance Event]
     end
     
-    subgraph "Error Handling"
+    subgraph ErrorHandling["Error Handling"]
         I[Track Function] --> J{Environment Check}
         J -->|Production| K[Send Event]
         J -->|Development| L[Console Log]
@@ -227,14 +238,19 @@ graph LR
         N -->|Success| P[Continue]
     end
     
-    style A fill:#e8f5e8
-    style E fill:#fff3e0
-    style I fill:#fce4ec
+    classDef standard fill:#e8f5e8,stroke:#4caf50
+    classDef performance fill:#fff3e0,stroke:#ff9800
+    classDef error fill:#fce4ec,stroke:#e91e63
+    
+    class A,B,C,D standard
+    class E,F,G,H performance
+    class I,J,K,L,M,N,O,P error
 ```
 
 ## Configuration Management
 
 ### Environment-Based Behavior
+
 
 ```mermaid
 graph TD

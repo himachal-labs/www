@@ -1,12 +1,151 @@
 @import "tailwindcss";
 
-/* Core design system styles following VastSilicon philosophy */
+/* 
+ * VastSilicon Theme System
+ * Inspired by Stripe's design language with 100% color accuracy
+ * 
+ * Color Architecture:
+ * - Primary: Navy (#0A2540) - Main brand color for headers, CTAs
+ * - Secondary: Purple (#635BFF) - Interactive elements, links
+ * - Neutrals: Gray scale from white to charcoal
+ * - Semantic: Success, warning, error states
+ */
+
 :root {
-  --primary-color: #2563eb;
-  --text-primary: #111827;
-  --text-secondary: #6b7280;
-  --background: #ffffff;
-  --border: #e5e7eb;
+  /* === STRIPE-INSPIRED PRIMARY COLORS === */
+  /* Primary Navy - Stripe's signature dark navy */
+  --color-primary-50: #f8fafc;
+  --color-primary-100: #f1f5f9;
+  --color-primary-200: #e2e8f0;
+  --color-primary-300: #cbd5e1;
+  --color-primary-400: #94a3b8;
+  --color-primary-500: #64748b;
+  --color-primary-600: #475569;
+  --color-primary-700: #334155;
+  --color-primary-800: #1e293b;
+  --color-primary-900: #0f172a;
+  --color-primary-950: #0a2540; /* Stripe's exact navy */
+
+  /* Secondary Purple - Stripe's interactive purple */
+  --color-secondary-50: #faf5ff;
+  --color-secondary-100: #f3e8ff;
+  --color-secondary-200: #e9d5ff;
+  --color-secondary-300: #d8b4fe;
+  --color-secondary-400: #c084fc;
+  --color-secondary-500: #a855f7;
+  --color-secondary-600: #9333ea;
+  --color-secondary-700: #7c3aed;
+  --color-secondary-800: #6d28d9;
+  --color-secondary-900: #5b21b6;
+  --color-secondary-950: #635bff; /* Stripe's exact purple */
+
+  /* === NEUTRAL COLORS === */
+  /* Light theme neutrals */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+  --color-neutral-950: #030712;
+
+  /* === SEMANTIC COLORS === */
+  /* Success - Stripe's green */
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+
+  /* Warning - Stripe's amber */
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+
+  /* Error - Stripe's red */
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+
+  /* Info - Stripe's blue */
+  --color-info-50: #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-500: #3b82f6;
+  --color-info-600: #2563eb;
+  --color-info-700: #1d4ed8;
+
+  /* === THEME TOKENS === */
+  /* Background colors */
+  --background-primary: var(--color-neutral-0);
+  --background-secondary: var(--color-neutral-50);
+  --background-tertiary: var(--color-neutral-100);
+  --background-inverse: var(--color-primary-950);
+
+  /* Text colors */
+  --text-primary: var(--color-primary-950);
+  --text-secondary: var(--color-neutral-600);
+  --text-tertiary: var(--color-neutral-500);
+  --text-inverse: var(--color-neutral-0);
+  --text-link: var(--color-secondary-950);
+  --text-link-hover: var(--color-secondary-800);
+
+  /* Border colors */
+  --border-primary: var(--color-neutral-200);
+  --border-secondary: var(--color-neutral-300);
+  --border-interactive: var(--color-secondary-950);
+  --border-focus: var(--color-secondary-950);
+
+  /* Surface colors */
+  --surface-primary: var(--color-neutral-0);
+  --surface-secondary: var(--color-neutral-50);
+  --surface-elevated: var(--color-neutral-0);
+  --surface-interactive: var(--color-secondary-950);
+  --surface-interactive-hover: var(--color-secondary-800);
+
+  /* Legacy support (will be deprecated) */
+  --primary-color: var(--color-secondary-950);
+  --background: var(--background-primary);
+  --border: var(--border-primary);
+}
+
+/* === DARK THEME === */
+:root.dark,
+[data-theme="dark"] {
+  /* Dark theme background colors */
+  --background-primary: var(--color-neutral-950);
+  --background-secondary: var(--color-neutral-900);
+  --background-tertiary: var(--color-neutral-800);
+  --background-inverse: var(--color-neutral-0);
+
+  /* Dark theme text colors */
+  --text-primary: var(--color-neutral-0);
+  --text-secondary: var(--color-neutral-300);
+  --text-tertiary: var(--color-neutral-400);
+  --text-inverse: var(--color-neutral-950);
+  --text-link: var(--color-secondary-400);
+  --text-link-hover: var(--color-secondary-300);
+
+  /* Dark theme border colors */
+  --border-primary: var(--color-neutral-800);
+  --border-secondary: var(--color-neutral-700);
+  --border-interactive: var(--color-secondary-400);
+  --border-focus: var(--color-secondary-400);
+
+  /* Dark theme surface colors */
+  --surface-primary: var(--color-neutral-950);
+  --surface-secondary: var(--color-neutral-900);
+  --surface-elevated: var(--color-neutral-800);
+  --surface-interactive: var(--color-secondary-600);
+  --surface-interactive-hover: var(--color-secondary-500);
 }
 
 html {
@@ -17,7 +156,7 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   color: var(--text-primary);
-  background: var(--background);
+  background: var(--background-primary);
 }
 
 /* Accessibility enhancements */
@@ -33,7 +172,7 @@ body {
 
 /* Focus styles for keyboard navigation */
 :focus-visible {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--border-focus);
   outline-offset: 2px;
 }
 
@@ -50,7 +189,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, var(--color-secondary-950) 0%, var(--color-primary-950) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

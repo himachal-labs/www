@@ -75,7 +75,15 @@
       "Bash(traceroute:*)",
       "Bash(openssl s_client:*)",
       "Bash(host:*)",
-      "Bash(mtr:*)"
+      "Bash(mtr:*)",
+      "WebFetch(domain:stripe.com)",
+      "WebFetch(domain:www.stripe.com)",
+      "WebFetch(domain:openai.com)",
+      "WebFetch(domain:openai.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(claude mcp add playwright npx @playwright/mcp)",
+      "Bash(claude mcp:*)",
+      "WebFetch(domain:learn.microsoft.com)"
     ],
     "deny": []
   }

@@ -318,6 +318,22 @@ test: add validation for product metadata
 - Prettier
 - MDX
 
+### MCP Servers for Website Analysis
+
+```bash
+# Install Playwright MCP for webpage analysis
+npm install @playwright/mcp
+
+# Add server - choose scope:
+claude mcp add -s user playwright npx @playwright/mcp     # User-wide (all projects)
+claude mcp add -s local playwright npx @playwright/mcp    # Project-only
+
+# Verify and manage
+claude mcp list                    # List all servers
+claude mcp get playwright          # Show server details
+claude mcp remove playwright -s local  # Remove from specific scope
+```
+
 ### Environment Variables
 
 ```bash
@@ -347,5 +363,188 @@ VERCEL_ANALYTICS_ID=your_analytics_id  # Auto-detected in production
 3. **Check build**: `npm run build`
 4. **See [Troubleshooting](troubleshooting.md)** for common issues
 
+## UI Component Framework
+
+### Component Architecture
+
+Our component system enables rapid iteration while maintaining consistency:
+
+```
+src/components/
+├── ui/               # Base design system components
+├── layout/           # Page structure components  
+├── product/          # Product-specific templates
+├── trust/            # Social proof components
+├── agency/           # Problem/solution patterns
+├── analytics/        # Tracking components
+└── performance/      # Optimization components
+```
+
+### Rapid Iteration Patterns
+
+#### 1. Variant-Based Components
+
+**Pattern: Multiple UI variants in single component**
+
+```typescript
+interface ButtonProps {
+  variant: 'primary' | 'secondary' | 'ghost' | 'outline' | 'cta-green' | 'cta-large'
+  size: 'sm' | 'md' | 'lg' | 'xl'
+  intent?: 'download' | 'learn-more' | 'contact' | 'navigation'
+  testVariant?: string // For A/B testing
+}
+
+// Easy variant switching for tests
+<Button variant={experimentVariant || 'primary'} intent="download">
+  {ctaText || 'Download Now'}
+</Button>
+```
+
+#### 2. Content-Driven Components
+
+**Pattern: Externalized content for rapid copy testing**
+
+```typescript
+interface HeroConfig {
+  headline: string
+  subheadline: string
+  cta: { primary: string; secondary?: string }
+  variant: 'center' | 'left' | 'split'
+}
+
+const heroVariants = {
+  'agency-focused': {
+    headline: 'Stop guessing. Start knowing.',
+    subheadline: 'We restore human agency through AI-augmented decision-making.',
+    variant: 'center'
+  },
+  'product-focused': {
+    headline: 'Smart apps for complex decisions',
+    subheadline: 'AI-powered tools that translate complexity into clarity.',
+    variant: 'split'
+  }
+}
+```
+
+#### 3. Layout Template System
+
+**Pattern: Composable sections with swappable layouts**
+
+```typescript
+interface ProductPageConfig {
+  hero: HeroConfig
+  problemSolution?: ProblemSolutionConfig
+  features: FeatureConfig
+  screenshots: ScreenshotConfig
+  availability: AvailabilityConfig
+  layout: 'default' | 'showcase' | 'minimal'
+}
+
+const ProductPage = ({ config }: { config: ProductPageConfig }) => {
+  const Layout = layoutComponents[config.layout]
+  
+  return (
+    <Layout>
+      <ProductHero {...config.hero} />
+      {config.problemSolution && <ProblemSolutionPair {...config.problemSolution} />}
+      <ScreenshotCarousel {...config.screenshots} />
+      <FeatureGrid {...config.features} />
+      <AvailabilitySection {...config.availability} />
+    </Layout>
+  )
+}
+```
+
+### UI Iteration Strategy
+
+#### Component-Level Iteration (1-2 hours)
+- **Strategy**: Atomic component testing
+- **Process**: Component → Isolated testing → Deploy → Measure → Iterate
+- **Priority**: Header/Navigation, Hero sections, CTA buttons, Product cards
+
+#### Section-Level Iteration (4-8 hours)  
+- **Strategy**: Template-based testing
+- **Process**: Section template → Content variants → Layout testing → User feedback
+- **Priority**: Product introduction, Feature showcase, Company story
+
+#### Page-Level Iteration (1-2 days)
+- **Strategy**: Full user journey testing
+- **Process**: User flow mapping → Page architecture → Content strategy → Multi-device testing
+
+### A/B Testing Integration
+
+```typescript
+// Hook for component-level A/B tests
+export const useABTest = (testName: string, variants: string[]) => {
+  const [variant, setVariant] = useState<string>()
+  
+  useEffect(() => {
+    const selectedVariant = analytics.getVariant(testName, variants)
+    setVariant(selectedVariant)
+  }, [testName])
+  
+  return variant || variants[0]
+}
+
+// Usage in components
+export const TestableButton = (props: ButtonProps) => {
+  const variant = useABTest('cta-button-test', ['primary', 'cta-green', 'cta-large'])
+  return <Button {...props} variant={variant} />
+}
+```
+
+### Performance Optimization Patterns
+
+```typescript
+// Lazy load heavy components
+const ScreenshotCarousel = lazy(() => import('./ScreenshotCarousel'))
+const InteractiveDemo = lazy(() => import('./InteractiveDemo'))
+
+// Usage with loading states
+export const ProductPage = () => {
+  return (
+    <div>
+      <ProductHero />
+      <Suspense fallback={<ScreenshotPlaceholder />}>
+        <ScreenshotCarousel />
+      </Suspense>
+      <Suspense fallback={<DemoPlaceholder />}>
+        <InteractiveDemo />
+      </Suspense>
+    </div>
+  )
+}
+```
+
+### Implementation Guidelines
+
+#### Component Development Workflow
+```bash
+# 1. Create component variant
+npm run create-component ComponentName
+
+# 2. Add to Storybook for visual testing
+npm run storybook
+
+# 3. Implement A/B test variants
+npm run test:visual
+
+# 4. Deploy with feature flag
+npm run deploy:staged
+
+# 5. Monitor metrics
+npm run analytics:component ComponentName
+```
+
+#### Configuration Management
+```
+src/config/
+├── components/       # Component configurations
+├── pages/           # Page configurations  
+├── themes/          # Theme configurations
+├── experiments/     # A/B test configurations
+└── features/        # Feature flag configurations
+```
+
 For technical reference, see [API Reference](api-reference.md).
-For deployment, see [Deployment Guide](deployment.md).
+For deployment, see [Deployment Guide](deployment-guide.md).

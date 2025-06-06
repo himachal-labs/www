@@ -1,6 +1,6 @@
 # API Reference
 
-Technical reference for component interfaces, content schemas, and configuration options.
+Technical reference for component interfaces, content schemas, configuration options, and platform integrations.
 
 ## Content Schemas
 
@@ -224,6 +224,53 @@ interface FooterProps {
   showSocial?: boolean
   className?: string
 }
+```
+
+## Platform Integrations
+
+### Apple App Site Association (AASA)
+
+AASA files enable Universal Links for iOS app deep linking.
+
+#### Configuration Details
+- **Team ID**: `D8NYN6GSAF`
+- **Bundle ID**: `com.vastsilicon.FinanceManager`
+- **App ID**: `D8NYN6GSAF.com.vastsilicon.FinanceManager`
+
+#### AASA File Structure
+```json
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "D8NYN6GSAF.com.vastsilicon.FinanceManager",
+        "paths": [
+          "/invite/friend/*",
+          "/invite/group/*",
+          "/process-receipt/*"
+        ]
+      }
+    ]
+  }
+}
+```
+
+#### File Locations
+- Primary: `/.well-known/apple-app-site-association`
+- Fallback: `/apple-app-site-association`
+- Implementation: Static files in `public/` directory
+
+#### Universal Link Patterns
+- `/invite/friend/*` - Friend invitation links
+- `/invite/group/*` - Group invitation links  
+- `/process-receipt/*` - Receipt processing links
+
+#### Expected Response Headers
+```
+Content-Type: application/json
+Cache-Control: public, max-age=3600
+Status: 200 OK
 ```
 
 ## Configuration Options

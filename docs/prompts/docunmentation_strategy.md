@@ -6,6 +6,7 @@ Common Documentation issues(Duplications)
 - redundant files with overlapping content
 - scattered information into focused documents
 - inconsistencies in configuration examples and commands
+- new files created when existing files should be updated
 
 Industry-Standard Structure
 
